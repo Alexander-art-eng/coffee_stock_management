@@ -49,11 +49,6 @@ To run the application and display the coffee stock, execute the following comma
 python coffee_management/main.py
 ```
 
-To run the tests, use:
-```bash
-pytest tests/test_inventory.py
-```
-
 To display more information about the test, run:
 ```bash
 pytest -v tests/test_inventory.py
@@ -67,17 +62,6 @@ pytest -v tests/test_inventory.py
   - `display.py`: Contains logic to display the coffee stock in a tabular format.
 - `tests/`
   - `test_inventory.py`: Contains unit tests for the inventory management functions.
-
-## Testing
-
-The application includes unit tests to ensure the functionality of the inventory management system. The tests cover:
-- Selling coffee packs and verifying the stock reduction in the database.
-- Refilling coffee packs and verifying the stock increase in the database.
-
-To run the tests, navigate to the project directory and execute:
-```bash
-pytest tests/test_inventory.py
-```
 
 ## Contributing
 
