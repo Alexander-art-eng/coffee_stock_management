@@ -13,12 +13,13 @@ The Coffee Management System is a Python application designed to manage coffee i
 
 ## Database Setup
 
-1. **Install MySQL**: Ensure you have MySQL installed on your machine. You can download it from [MySQL's official website](https://dev.mysql.com/downloads/mysql/).
+1. **Install MySQL**: En****sure you have MySQL installed on your machine. You can download it from [MySQL's official website](https://dev.mysql.com/downloads/mysql/).
 
 2. **Create Database**: Create a database named `coffee_stock_db` in your MySQL server. You can do this using the MySQL command line or a GUI tool like MySQL Workbench.
 
 3. **Create Table**: Run the following SQL command to create the necessary table for storing coffee stock:
-   ```sql
+   ```
+   sql
    CREATE TABLE coffee_stock (
        id INT AUTO_INCREMENT PRIMARY KEY,
        coffee_pack VARCHAR(255) NOT NULL,
@@ -32,25 +33,35 @@ The Coffee Management System is a Python application designed to manage coffee i
 ## Installation
 
 1. Clone the repository:
-   ```bash
+   ```
+   bash
    git clone <repository-url>
    cd coffee_management
    ```
-
-2. Install the required packages using `requirements.txt`:
-   ```bash
+2. Create a .env file in the root directory of your project and add your database credentials:  
+    ```
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=your_password
+   DB_NAME=coffee_stock_db
+    ```
+3. Install the required packages using `requirements.txt`:
+   ```
+   bash
    pip install -r requirements.txt
    ```
 
 ## Usage
 
 To run the application and display the coffee stock, execute the following command:
-```bash
+```
+bash
 python coffee_management/main.py
 ```
 
 To display more information about the test, run:
-```bash
+```
+bash
 pytest -v tests/test_inventory.py
 ```
 

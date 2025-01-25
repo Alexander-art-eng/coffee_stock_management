@@ -4,6 +4,17 @@ Database module: Handles database connection and queries.
 """
 
 import mysql.connector
+from dotenv import load_dotenv
+import os
+
+# Load environment from .env
+load_dotenv()
+
+# Acess the environment variables
+db_host = os.getenv('DB_HOST')
+db_user = os.getenv('DB_USER')
+db_password = os.getenv('DB_PASSWORD')
+db_name = os.getenv('DB_NAME')
 
 # Database connection function
 def connect_to_db():
@@ -13,10 +24,10 @@ def connect_to_db():
         connection: A MySQL database connection object.
     """
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="sA!EXAyLP2@m59x%GPE9",
-        database="coffee_stock_db"
+        host=db_host,
+        user=db_user,
+        password=db_password,
+        database=db_name
     )
 
 def execute_query(query, params=None, fetch=False):
