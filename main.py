@@ -13,7 +13,7 @@ def main():
     print(f"\n{'-' * 12} Welcome to the Coffee Stock Management {'-' * 12} \n")
 
     # Initialize stock in the database
-    # initialize_stock()
+    initialize_stock()
 
     # Display stock
     print("The initial coffee pack inventory")
@@ -21,7 +21,7 @@ def main():
 
     # Example operations
     print("Selling Coffee Pack")
-    sold_coffee("Buna Blend", "100g", "Ground", 3)
+    sold_coffee("Buna Blend", "100g", "Ground", 0)
     # print("Refilling the coffee stock")
     # refill_stock("Buna Blend", "100g", "Ground", 3)
 

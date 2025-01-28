@@ -2,7 +2,7 @@
 """
 Inventory module: Handles selling and refilling coffee stock.
 """
-
+from coffee_management.data_structure import coffee_stock
 from coffee_management.database import execute_query, fetch_one
 
 def sold_coffee(coffee_name, size, coffee_type, quantity_sold):
@@ -14,6 +14,15 @@ def sold_coffee(coffee_name, size, coffee_type, quantity_sold):
     if not validate_coffee_details(coffee_name, size, coffee_type):
         raise ValueError("Invalid coffee details provided")
 
+    # Check current stock
+    current_stock = fetch_one("""
+        SELECT quantity FROM coffee_stock
+        WHERE coffee_pack = %s AND sizes = %s AND type = %s
+    """, (coffee_name, size, coffee_type))
+    current_quantity = current_stock['quantity']
+
+    if current_quantity < quantity_sold:
+        raise ValueError(f"Not enough stock for {coffee_name}, {size}, {coffee_type}. Transaction Cancelled.")
     # Reduce the quantity in the database
     execute_query("""
         UPDATE coffee_stock
