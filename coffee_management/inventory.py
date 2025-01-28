@@ -15,33 +15,35 @@ def sold_coffee(coffee_name, size, coffee_type, quantity_sold):
         raise ValueError("Invalid coffee details provided")
 
     # Check current stock
-    current_stock = fetch_one("""
-        SELECT quantity FROM coffee_stock
-        WHERE coffee_pack = %s AND sizes = %s AND type = %s
-    """, (coffee_name, size, coffee_type))
-    current_quantity = current_stock['quantity']
+    try:
+        current_stock = fetch_one("""
+            SELECT quantity FROM coffee_stock
+            WHERE coffee_pack = %s AND sizes = %s AND type = %s
+        """, (coffee_name, size, coffee_type))
+        current_quantity = current_stock['quantity']
 
-    if current_quantity < quantity_sold:
-        raise ValueError(f"Not enough stock for {coffee_name}, {size}, {coffee_type}. Transaction Cancelled.")
-    # Reduce the quantity in the database
-    execute_query("""
-        UPDATE coffee_stock
-        SET quantity = quantity - %s
-        WHERE coffee_pack = %s AND sizes = %s AND type = %s
-    """, (quantity_sold, coffee_name, size, coffee_type))
+        if current_quantity < quantity_sold:
+            raise ValueError(f"Not enough stock for {coffee_name}, {size}, {coffee_type}. Transaction Cancelled.")
+        # Reduce the quantity in the database
+        execute_query("""
+            UPDATE coffee_stock
+            SET quantity = quantity - %s
+            WHERE coffee_pack = %s AND sizes = %s AND type = %s
+        """, (quantity_sold, coffee_name, size, coffee_type))
 
-    # Check if the stock goes negative
-    new_quantity = fetch_one("""
-        SELECT quantity FROM coffee_stock
-        WHERE coffee_pack = %s AND sizes = %s AND type = %s
-    """, (coffee_name, size, coffee_type))['quantity']
+        # Check if the stock goes negative
+        new_quantity = fetch_one("""
+            SELECT quantity FROM coffee_stock
+            WHERE coffee_pack = %s AND sizes = %s AND type = %s
+        """, (coffee_name, size, coffee_type))['quantity']
 
-    if new_quantity < 0:
-        print(f"Error: Not enough stock for {coffee_name}, {size}, {coffee_type}. Transaction canceled.")
-        execute_query("ROLLBACK")
-    else:
-        print(f"Sold {quantity_sold} of {coffee_name}, {size}, {coffee_type}.")
-
+        if new_quantity < 0:
+            print(f"Error: Not enough stock for {coffee_name}, {size}, {coffee_type}. Transaction canceled.")
+            execute_query("ROLLBACK")
+        else:
+            print(f"Sold {quantity_sold} of {coffee_name}, {size}, {coffee_type}.")
+    except ValueError as e:
+        print(f"Not enough stock for {coffee_name}, of size {size}, in {coffee_type}. Transaction failed")
 def refill_stock(coffee_name, size, coffee_type, quantity_refilled):
     """
     Refills coffee stock and updates the database.
