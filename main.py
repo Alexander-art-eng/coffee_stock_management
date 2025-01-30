@@ -19,9 +19,16 @@ def main():
 
     # Example operations
     # print("Selling Coffee Pack")
-    # sold_coffee("Buna Blend", "100g", "Ground", 1)
+    # sold_coffee("Yirgacheffe", "250g", "Ground", 1)
+    # sold_coffee("Buna blend", "2.5kg", "Beans", 1)
+
+
     # print("Refilling the coffee stock")
-    # refill_stock("Buna Blend", "100g", "Ground", 1)
+    # refill_stock("Yirgacheffe", "250g", "Ground", 2)
+    # refill_stock("Nyeri", "250g", "Ground", 2)
+    # refill_stock("Upendo Africa", "250g", "Ground", 1)
+    # refill_stock("Buna blend", "2.5kg", "Beans", 1)
+
 
     # print("Updated Coffee Stock after sell and refill: \n")
     # display_coffee_stock()
