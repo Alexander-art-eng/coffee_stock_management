@@ -1,5 +1,3 @@
-from tkinter.font import names
-
 from coffee_management.database import execute_query
 
 def add_new_stock(coffee_pack, size, coffee_type, price, quantity):
@@ -18,8 +16,8 @@ def add_new_stock(coffee_pack, size, coffee_type, price, quantity):
     """, (coffee_pack, size, coffee_type, price, quantity))
     print(f"New Coffee added to the stock: {coffee_pack} - {size} - {coffee_type} - {price} - {quantity}")
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 #     add_new_stock("Gyvenimo kava", "250g", "Ground", 15.00, 2)
 #     add_new_stock("Gyvenimo kava", "250g", "Beans", 15.00, 1)
-#     add_new_stock("Queen barbora coffee", "250g", "Beans", 15.00, 2)
-#    add_new_stock("Queen barbora coffee", "250g", "Ground", 15.00, 2)
+    add_new_stock("Queen barbora coffee", "250g", "Beans", 17.50, 2)
+    add_new_stock("Queen barbora coffee", "250g", "Ground", 17.50, 2)

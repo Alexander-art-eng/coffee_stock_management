@@ -51,11 +51,7 @@ def sold_coffee(coffee_name, size, coffee_type, quantity_sold):
             execute_query("ROLLBACK")
         else:
             print(f"Sold {quantity_sold} of {coffee_name}, {size}, {coffee_type}.")
-    except NegativeQuantityError as e:
-        print(f"Error: {e}")
-    except InvalidCoffeeDetailsError as e:
-        print(f"Error: {e}")
-    except InsufficientStockError as e:
+    except (NegativeQuantityError, InvalidCoffeeDetailsError, InsufficientStockError) as e:
         print(f"Error: {e}")
 
 def refill_stock(coffee_name, size, coffee_type, quantity_refilled):
